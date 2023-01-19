@@ -1,7 +1,15 @@
 // Declerations
 
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
+const scissors = document.getElementById('scissors');
+const playerPoints = document.getElementsByClassName('playerScore');
+const computerPoints = document.getElementsByClassName('computerScore');
+
 let playerSelection;
 let computerSelection;
+let totalPlayerScore = 0;
+let totalComputerScore = 0;
 
 // getComputerChoice function return one of three values,
 // Rock, Paper or Scissors.
@@ -17,13 +25,14 @@ function getComputerChoice () {
 // playRound takes in playerSelection and computerSelection and
 // compares between the two to identify the winner.
 
-function playRound () {
+function playRound (playerSelection) {
     let roundResult = "it's a Draw!";
     let playerScore = 0;
+    let computerScore = 0;
 
-    playerSelection = prompt('Choose your play!');
     computerSelection = getComputerChoice();
 
+    
     // Player chooses Rock.
     if (playerSelection.toUpperCase() === 'ROCK') {
         if (computerSelection === 'SCISSORS') {
@@ -31,7 +40,7 @@ function playRound () {
             playerScore = 1;
         } else if (computerSelection === 'PAPER') {
             roundResult = 'You lose! Paper beats Rock';
-            playerScore = -1; 
+            computerScore = 1; 
         }
     };
 
@@ -42,7 +51,7 @@ function playRound () {
             playerScore = 1;
         } else if (computerSelection === 'SCISSORS') {
             roundResult = 'You lose! Scissors beats Paper';
-            playerScore = -1;
+            computerScore = 1;
         }
     };
 
@@ -53,31 +62,30 @@ function playRound () {
             playerScore = 1;
         } else if (computerSelection === 'ROCK') {
             roundResult = 'You lose! Rock beats Scissors';
-            playerScore = -1;
+            computerScore = 1;
         }
     };
 
+    totalPlayerScore += playerScore;
+    totalComputerScore += computerScore;
+    playerPoints[0].textContent = totalPlayerScore;
+    computerPoints[0].textContent = totalComputerScore;
     console.log(roundResult);
     console.log(playerScore);
     return playerScore;
 }
 
-function game() {
-    let playerPoints = 0;
-    let computerPoints = 0;
-    let endResults;
+rock.addEventListener('click', (e) => {
+    console.log(rock.id);
+    playRound(rock.id);
+});
 
-    for (i = 0 ; i < 5 ; i++) {
-        endResults = playRound();
+paper.addEventListener('click', (e) => {
+    console.log(paper.id);
+    playRound(paper.id);
+});
 
-        if (endResults > 0) {
-            playerPoints++
-        } else if (endResults < 0) {
-            computerPoints++
-        }
-    };
-
-    return 'Final score, you got ' + playerPoints + ' Vs ' + computerPoints;
-}
-
-console.log(game());
+scissors.addEventListener('click', (e) => {
+    console.log(scissors.id);
+    playRound(scissors.id);
+});
