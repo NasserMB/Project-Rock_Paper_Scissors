@@ -5,6 +5,7 @@ const paper = document.getElementById('paper');
 const scissors = document.getElementById('scissors');
 const playerPoints = document.getElementsByClassName('playerScore');
 const computerPoints = document.getElementsByClassName('computerScore');
+const gameStatus = document.getElementsByClassName('gameStatus');
 
 let playerSelection;
 let computerSelection;
@@ -29,6 +30,11 @@ function playRound (playerSelection) {
     let roundResult = "it's a Draw!";
     let playerScore = 0;
     let computerScore = 0;
+
+    if (totalComputerScore == 5 || totalPlayerScore == 5) {
+        totalComputerScore = 0;
+        totalPlayerScore = 0;
+    }
 
     computerSelection = getComputerChoice();
 
@@ -68,8 +74,13 @@ function playRound (playerSelection) {
 
     totalPlayerScore += playerScore;
     totalComputerScore += computerScore;
+
+    if (totalPlayerScore == 5) roundResult = 'YOU WIN!!!';
+    if (totalComputerScore == 5) roundResult = 'computer wins...try again';
+
     playerPoints[0].textContent = totalPlayerScore;
     computerPoints[0].textContent = totalComputerScore;
+    gameStatus[0].textContent = roundResult;
     console.log(roundResult);
     console.log(playerScore);
     return playerScore;

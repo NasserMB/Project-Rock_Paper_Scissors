@@ -22,9 +22,28 @@ div {
 .score {
     display: flex;
     justify-content: space-around;
+    font-size: 24px;
 }
 
 .playerButtons {
     display: flex;
     justify-content: space-around;
+}
+
+button {
+    background-color: white;
+    color: black;
+    border: 0.5px solid black;
+    font-size: 16px;
+    padding: 15px;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
 }
